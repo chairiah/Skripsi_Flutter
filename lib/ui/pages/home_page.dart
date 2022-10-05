@@ -26,49 +26,25 @@ class HomePage extends StatelessWidget {
             ),
             Column(
               children: [
-                Row(
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.only(top: 10, left: 10),
-                      width: 60,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: kPrimaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: kBackgroundColor.withOpacity(0.1),
-                            blurRadius: 15,
-                            offset: const Offset(0, 0),
-                          ),
-                        ],
-                        borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(20),
-                          topLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.menu,
-                        color: kWhiteColor,
-                        size: 25,
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(
                   height: 35,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      'Halo, Selamat Datang di\nGudang Kami!!!',
-                      style: brownTextStyle.copyWith(
-                        fontSize: 25,
-                        fontWeight: bold,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Halo, Selamat Datang di\nGudang Kami!!!',
+                        style: brownTextStyle.copyWith(
+                          fontSize: 25,
+                          fontWeight: bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 40,
@@ -99,7 +75,7 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                 image: AssetImage(
-                                  'assets/images/rumah.jpg',
+                                  'assets/images/homegudang.jpg',
                                 ),
                                 fit: BoxFit.cover,
                               ),
@@ -132,7 +108,7 @@ class HomePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                 image: AssetImage(
-                                  'assets/images/ch.jpg',
+                                  'assets/images/homeabout.jpg',
                                 ),
                                 fit: BoxFit.cover,
                               ),

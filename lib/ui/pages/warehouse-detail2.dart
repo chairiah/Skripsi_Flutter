@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:aplikasi_skripsi_ch/shared/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class WarehouseDetailPage extends StatelessWidget {
-  const WarehouseDetailPage({Key? key}) : super(key: key);
+class WarehouseDetailPage2 extends StatelessWidget {
+  const WarehouseDetailPage2({Key? key}) : super(key: key);
 
   Future<void> _launchUrl(url) async {
     if (!await launchUrl(url)) {
@@ -88,7 +88,7 @@ class WarehouseDetailPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Image.asset(
-                          'assets/images/oro_coffe.jpg',
+                          'assets/images/tiara_coffe.jpg',
                           width: 150,
                           height: 110,
                           fit: BoxFit.cover,
@@ -108,7 +108,7 @@ class WarehouseDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Oro Coffe',
+                            'Tiara Global Coffe',
                             style: brownTextStyle.copyWith(
                               fontSize: 20,
                               fontWeight: bold,
@@ -117,10 +117,10 @@ class WarehouseDetailPage extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               _launchUrl(Uri.parse(
-                                  'https://goo.gl/maps/iaxMyNuebrozTcJg8'));
+                                  'https://goo.gl/maps/1vgXPtmKtFFSYEu59'));
                             },
                             child: Text(
-                              'Jl. Raya Bireuen-Takengon No.KM.100 Mongal, Kec. Bebesen, Kabupaten Aceh Tengah, Aceh 24471',
+                              'Mekar Jadi Ayu, Jl. Tawardi, Kec. Wih Pesam, Kabupaten Bener Meriah, Aceh 24471',
                               style: brownTextStyle.copyWith(
                                 fontSize: 13,
                                 fontWeight: bold,
@@ -128,8 +128,8 @@ class WarehouseDetailPage extends StatelessWidget {
                             ),
                           ),
                           const SocialButton(
-                            url: 'tel:6285276837747',
-                            content: '085276837747',
+                            url: 'tel:625213133737',
+                            content: '085213133737',
                             isWhatsApp: true,
                           ),
                         ],
@@ -179,7 +179,7 @@ class WarehouseDetailPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Rp 12.000,00',
+                                    'Rp -',
                                     style: whiteTextStyle.copyWith(
                                       fontSize: 18,
                                       fontWeight: bold,
@@ -228,7 +228,7 @@ class WarehouseDetailPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Rp 34.000,00',
+                                    'Rp 35.000,00',
                                     style: whiteTextStyle.copyWith(
                                       fontSize: 18,
                                       fontWeight: bold,
