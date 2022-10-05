@@ -7,7 +7,7 @@ class WarehouseDetailPage2 extends StatelessWidget {
   const WarehouseDetailPage2({Key? key}) : super(key: key);
 
   Future<void> _launchUrl(url) async {
-    if (!await launchUrl(url)) {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
   }
@@ -116,8 +116,10 @@ class WarehouseDetailPage2 extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              _launchUrl(Uri.parse(
-                                  'https://goo.gl/maps/1vgXPtmKtFFSYEu59'));
+                              _launchUrl(
+                                Uri.parse(
+                                    'https://goo.gl/maps/1vgXPtmKtFFSYEu59'),
+                              );
                             },
                             child: Text(
                               'Mekar Jadi Ayu, Jl. Tawardi, Kec. Wih Pesam, Kabupaten Bener Meriah, Aceh 24471',

@@ -7,7 +7,7 @@ class WarehouseDetailPage extends StatelessWidget {
   const WarehouseDetailPage({Key? key}) : super(key: key);
 
   Future<void> _launchUrl(url) async {
-    if (!await launchUrl(url)) {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw 'Could not launch $url';
     }
   }

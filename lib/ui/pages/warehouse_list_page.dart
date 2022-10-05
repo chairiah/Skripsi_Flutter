@@ -128,11 +128,17 @@ class WarehouseListPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/oro_coffe.jpg',
-                                      width: 110,
-                                      height: 110,
-                                      fit: BoxFit.cover,
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/oro_coffe.jpg',
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     // const Spacer(),
                                     Expanded(
@@ -194,11 +200,17 @@ class WarehouseListPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/tiara_coffe.jpg',
-                                      width: 110,
-                                      height: 110,
-                                      fit: BoxFit.cover,
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/tiara_coffe.jpg',
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     const Spacer(),
                                     Column(
@@ -258,11 +270,17 @@ class WarehouseListPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/gdselamat.jpg',
-                                      width: 110,
-                                      height: 110,
-                                      fit: BoxFit.cover,
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/gdselamat.jpg',
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     const Spacer(),
                                     Column(
@@ -322,11 +340,17 @@ class WarehouseListPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/iy.jpg',
-                                      width: 110,
-                                      height: 110,
-                                      fit: BoxFit.cover,
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/iy.jpg',
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     const Spacer(),
                                     Column(
@@ -385,11 +409,17 @@ class WarehouseListPage extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Image.asset(
-                                      'assets/images/jg.jpg',
-                                      width: 110,
-                                      height: 110,
-                                      fit: BoxFit.cover,
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(18),
+                                        bottomLeft: Radius.circular(18),
+                                      ),
+                                      child: Image.asset(
+                                        'assets/images/jg.jpg',
+                                        width: 110,
+                                        height: 110,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                     const Spacer(),
                                     Column(
