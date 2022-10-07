@@ -2,6 +2,7 @@ import 'package:aplikasi_skripsi_ch/ui/widgets/custom_navigation_item.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_skripsi_ch/shared/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:intl/intl.dart';
 
 class WarehouseDetailPage extends StatelessWidget {
   const WarehouseDetailPage({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class WarehouseDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ??
+        <String, dynamic>{}) as Map;
     Widget customNavigation() {
       return Align(
         alignment: Alignment.bottomCenter,
@@ -71,7 +74,7 @@ class WarehouseDetailPage extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               child: Image.asset(
                 'assets/images/bg_details_a.png',
@@ -87,8 +90,8 @@ class WarehouseDetailPage extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Image.asset(
-                          'assets/images/oro_coffe.jpg',
+                        Image.network(
+                          'https://ayo-wisuda.site/storage/chairiah/gudang-image/${arguments['gambar']}',
                           width: 150,
                           height: 110,
                           fit: BoxFit.cover,
@@ -108,7 +111,7 @@ class WarehouseDetailPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Oro Coffe',
+                            arguments['nama'],
                             style: brownTextStyle.copyWith(
                               fontSize: 20,
                               fontWeight: bold,
@@ -116,20 +119,19 @@ class WarehouseDetailPage extends StatelessWidget {
                           ),
                           GestureDetector(
                             onTap: () {
-                              _launchUrl(Uri.parse(
-                                  'https://goo.gl/maps/iaxMyNuebrozTcJg8'));
+                              _launchUrl(Uri.parse(arguments['url_alamat']));
                             },
                             child: Text(
-                              'Jl. Raya Bireuen-Takengon No.KM.100 Mongal, Kec. Bebesen, Kabupaten Aceh Tengah, Aceh 24471',
+                              arguments['alamat'],
                               style: brownTextStyle.copyWith(
                                 fontSize: 13,
                                 fontWeight: bold,
                               ),
                             ),
                           ),
-                          const SocialButton(
-                            url: 'tel:6285276837747',
-                            content: '085276837747',
+                          SocialButton(
+                            url: 'tel:62${arguments['no_hp'].substring(1)}',
+                            content: arguments['no_hp'],
                             isWhatsApp: true,
                           ),
                         ],
@@ -179,9 +181,20 @@ class WarehouseDetailPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Rp 12.000,00',
+                                    arguments['harga_kopi_gelondong'] != 0
+                                        ? NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0,
+                                          ).format(
+                                            arguments['harga_kopi_gelondong'],
+                                          )
+                                        : 'Tidak menerima kopi jenis ini',
                                     style: whiteTextStyle.copyWith(
-                                      fontSize: 18,
+                                      fontSize:
+                                          arguments['harga_kopi_gelondong'] != 0
+                                              ? 18
+                                              : 10,
                                       fontWeight: bold,
                                     ),
                                   ),
@@ -228,9 +241,20 @@ class WarehouseDetailPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Rp 34.000,00',
+                                    arguments['harga_kopi_gabah'] != 0
+                                        ? NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0,
+                                          ).format(
+                                            arguments['harga_kopi_gabah'],
+                                          )
+                                        : 'Tidak menerima kopi jenis ini',
                                     style: whiteTextStyle.copyWith(
-                                      fontSize: 18,
+                                      fontSize:
+                                          arguments['harga_kopi_gabah'] != 0
+                                              ? 18
+                                              : 10,
                                       fontWeight: bold,
                                     ),
                                   ),
@@ -277,9 +301,21 @@ class WarehouseDetailPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Rp 75.000,00',
+                                    arguments['harga_kopi_biji_hijau'] != 0
+                                        ? NumberFormat.currency(
+                                            locale: 'id',
+                                            symbol: 'Rp ',
+                                            decimalDigits: 0,
+                                          ).format(
+                                            arguments['harga_kopi_biji_hijau'],
+                                          )
+                                        : 'Tidak menerima kopi jenis ini',
                                     style: whiteTextStyle.copyWith(
-                                      fontSize: 18,
+                                      fontSize:
+                                          arguments['harga_kopi_biji_hijau'] !=
+                                                  0
+                                              ? 18
+                                              : 10,
                                       fontWeight: bold,
                                     ),
                                   ),

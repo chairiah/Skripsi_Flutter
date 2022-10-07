@@ -1,9 +1,31 @@
+import 'dart:convert';
+
 import 'package:aplikasi_skripsi_ch/ui/widgets/custom_navigation_item.dart';
+import 'package:aplikasi_skripsi_ch/ui/widgets/custom_warehouse_item.dart';
 import 'package:flutter/material.dart';
 import 'package:aplikasi_skripsi_ch/shared/theme.dart';
+import 'package:http/http.dart' as http;
 
-class WarehouseListPage extends StatelessWidget {
+class WarehouseListPage extends StatefulWidget {
   const WarehouseListPage({Key? key}) : super(key: key);
+
+  @override
+  State<WarehouseListPage> createState() => _WarehouseListPageState();
+}
+
+class _WarehouseListPageState extends State<WarehouseListPage> {
+  var dataGudang;
+  Future<void> ambilDataGudang() async {
+    final response =
+        await http.get(Uri.parse('https://ayo-wisuda.site/api/chairiah/index'));
+
+    if (response.statusCode == 200) {
+      dataGudang = jsonDecode(response.body.toString());
+      return dataGudang;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,365 +118,62 @@ class WarehouseListPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: ListView(
-                          padding: const EdgeInsets.only(
-                            left: 40.0,
-                            bottom: 105.0,
-                          ),
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/warehouse-detail');
-                              },
-                              child: Container(
+                      FutureBuilder(
+                        future: ambilDataGudang(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            return Expanded(
+                              child: ListView.builder(
                                 padding: const EdgeInsets.only(
-                                  left: 15,
-                                  right: 10,
-                                  top: 10,
-                                  bottom: 10,
+                                  left: 40.0,
+                                  bottom: 105.0,
                                 ),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                width: 200,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(18),
-                                        bottomLeft: Radius.circular(18),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/oro_coffe.jpg',
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                      ),
+                                itemCount: dataGudang.length,
+                                itemBuilder: (context, index) {
+                                  final gudang = snapshot.data as List;
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/warehouse-detail',
+                                        arguments: {
+                                          'nama': gudang[index]['nama'],
+                                          'alamat': gudang[index]['alamat'],
+                                          'url_alamat': gudang[index]
+                                              ['url_alamat'],
+                                          'no_hp': gudang[index]['no_hp'],
+                                          'gambar': gudang[index]['gambar'],
+                                          'harga_kopi_gelondong': int.parse(
+                                              gudang[index]
+                                                  ['harga_kopi_gelondong']),
+                                          'harga_kopi_gabah': int.parse(
+                                              gudang[index]
+                                                  ['harga_kopi_gabah']),
+                                          'harga_kopi_biji_hijau': int.parse(
+                                              gudang[index]
+                                                  ['harga_kopi_biji_hijau']),
+                                        },
+                                      );
+                                    },
+                                    child: CustomWarehouseItem(
+                                      image:
+                                          'https://ayo-wisuda.site/storage/chairiah/gudang-image/${gudang[index]['gambar']}',
+                                      title: gudang[index]['nama'],
+                                      address: gudang[index]['alamat'],
                                     ),
-                                    // const Spacer(),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.end,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            'Oro Coffee',
-                                            style: whiteTextStyle.copyWith(
-                                              fontSize: 15,
-                                              fontWeight: bold,
-                                            ),
-                                          ),
-                                          Text(
-                                            'Jl. Mongal Bebesen',
-                                            style: whiteTextStyle.copyWith(
-                                              fontSize: 13,
-                                              fontWeight: bold,
-                                            ),
-                                            // overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Icon(
-                                            Icons.arrow_right_alt,
-                                            size: 35,
-                                            color: kWhiteColor,
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
+                                  );
+                                  // return Text(snapshot.data.toString());
+                                },
                               ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/warehouse-detail2');
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                  left: 15,
-                                  right: 10,
-                                  top: 10,
-                                  bottom: 10,
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                width: 200,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(18),
-                                        bottomLeft: Radius.circular(18),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/tiara_coffe.jpg',
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Tiara Global Coffe',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 15,
-                                            fontWeight: bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jl. Lukup Sabun',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 13,
-                                            fontWeight: bold,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Icon(
-                                          Icons.arrow_right_alt,
-                                          size: 35,
-                                          color: kWhiteColor,
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/warehouse-detail3');
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                  left: 15,
-                                  right: 10,
-                                  top: 10,
-                                  bottom: 10,
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                width: 200,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(18),
-                                        bottomLeft: Radius.circular(18),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/gdselamat.jpg',
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Gudang Kopi H.Selamat',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 15,
-                                            fontWeight: bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jl. Bebesen, Takengon',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 13,
-                                            fontWeight: bold,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        Icon(
-                                          Icons.arrow_right_alt,
-                                          size: 35,
-                                          color: kWhiteColor,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/warehouse-detail4');
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                  left: 15,
-                                  right: 10,
-                                  top: 10,
-                                  bottom: 10,
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                width: 200,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(18),
-                                        bottomLeft: Radius.circular(18),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/iy.jpg',
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Gudang Ilham Yunus',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 15,
-                                            fontWeight: bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jl. Simpang 4, Takengon',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 13,
-                                            fontWeight: bold,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_right_alt,
-                                          size: 35,
-                                          color: kWhiteColor,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                    context, '/warehouse-detail5');
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.only(
-                                  left: 15,
-                                  right: 10,
-                                  top: 10,
-                                  bottom: 10,
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 10),
-                                width: 200,
-                                height: 140,
-                                decoration: BoxDecoration(
-                                  color: kPrimaryColor,
-                                  borderRadius: const BorderRadius.only(
-                                    topLeft: Radius.circular(30),
-                                    bottomLeft: Radius.circular(30),
-                                  ),
-                                ),
-                                child: Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.only(
-                                        topLeft: Radius.circular(18),
-                                        bottomLeft: Radius.circular(18),
-                                      ),
-                                      child: Image.asset(
-                                        'assets/images/jg.jpg',
-                                        width: 110,
-                                        height: 110,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    const Spacer(),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.end,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Gudang Jikri Gayo',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 15,
-                                            fontWeight: bold,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jl. Simpang 4, Takengon',
-                                          style: whiteTextStyle.copyWith(
-                                            fontSize: 13,
-                                            fontWeight: bold,
-                                          ),
-                                        ),
-                                        Icon(
-                                          Icons.arrow_right_alt,
-                                          size: 35,
-                                          color: kWhiteColor,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text('${snapshot.error}');
+                          } else {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                        },
                       )
                     ],
                   ),
