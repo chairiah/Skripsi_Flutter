@@ -46,7 +46,7 @@ class OnBoardingPage extends StatelessWidget {
                 Text(
                   'Temukan Gudang Kopi \nPilihan Anda Tepat Waktu',
                   style: brownTextStyle.copyWith(
-                    fontSize: 30,
+                    fontSize: 28,
                     fontWeight: bold,
                   ),
                   textAlign: TextAlign.center,
